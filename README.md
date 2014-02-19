@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Strech/vines-backdoor.png?branch=master)](https://travis-ci.org/Strech/vines-backdoor)
+
 # Vines::Backdoor
 
 TODO: Write a gem description
