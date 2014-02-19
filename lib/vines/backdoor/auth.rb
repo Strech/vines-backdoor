@@ -14,7 +14,7 @@ module Vines
           send_auth_fail(SaslErrors::MalformedRequest.new)
         elsif stream.authentication_mechanisms.include?(node[MECHANISM])
           if node[MECHANISM] == INTERNAL
-            stream.user = authenticate(node.text)
+            stream.user = authenticate(node.text) or raise StreamErrors::NotAuthorized
           end
         else
           send_auth_fail(SaslErrors::InvalidMechanism.new)
@@ -26,7 +26,6 @@ module Vines
         node.xpath('ns:auth', 'ns' => NS).any?
       end
 
-      # FIXME : Вот тут не ясно, что будет, если пользователя не нашли
       def authenticate(jid)
         log.info("Authenticating user: %s" % jid)
         stream.storage.find_user(jid).tap do |user|

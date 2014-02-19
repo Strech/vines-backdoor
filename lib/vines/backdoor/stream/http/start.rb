@@ -9,6 +9,7 @@ module Vines
           if session = Sessions[node['sid']]
             session.resume(stream, node)
           else
+
             if node['backdoor']
               backdoor = Vines::Backdoor::Gap.new(stream)
               backdoor.node(node)

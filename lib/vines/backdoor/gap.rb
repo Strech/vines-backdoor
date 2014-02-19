@@ -1,4 +1,5 @@
 # coding: utf-8
+require "nokogiri"
 
 module Vines
   module Backdoor
@@ -21,21 +22,20 @@ module Vines
         advance(node)
       end
 
-      # TODO : Сделать генерацию через Nokogiri?
+      private
       def advance(node)
-        response = %Q{
-        <iq type="result" id="#{node['rid']}">
-          <bind xmlns="urn:ietf:params:xml:ns:xmpp-bind">
-            <jid>#{stream.user.jid}</jid>
-            <sid>#{stream.id}</sid>
-          </bind>
-        </iq>
-        }
+        doc = Nokogiri::XML::Document.new
+        result = doc.create_element('iq', 'id' => node['rid'], 'type' => 'result') do |el|
+          el << doc.create_element('bind') do |bind|
+            bind.default_namespace = Vines::Stream::Client::Bind::NS
+            bind << doc.create_element('jid', stream.user.jid.to_s)
+            bind << doc.create_element('sid', stream.id)
+          end
+        end
 
-        stream.write(response)
+        stream.write(result)
       end
 
-      private
       def backdoor?(node)
         node[BACKDOOR] && node[BACKDOOR] == @stream.backdoor
       end
