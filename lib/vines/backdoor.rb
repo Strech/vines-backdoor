@@ -1,5 +1,4 @@
 # coding: utf-8
-
 require "vines/backdoor/version"
 require "vines/backdoor/gap"
 require "vines/backdoor/bind"

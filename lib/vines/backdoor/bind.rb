@@ -1,5 +1,4 @@
 # coding: UTF-8
-
 module Vines
   module Backdoor
     class Bind < Vines::Stream::Client::Bind

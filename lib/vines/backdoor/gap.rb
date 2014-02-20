@@ -39,6 +39,6 @@ module Vines
       def backdoor?(node)
         node[BACKDOOR] && node[BACKDOOR] == @stream.backdoor
       end
-    end
-  end
-end
+    end # class Gap
+  end # module Backdoor
+end # module Vines

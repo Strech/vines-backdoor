@@ -1,5 +1,4 @@
 # coding: UTF-8
-
 module Vines
   class Stream
     class Http
