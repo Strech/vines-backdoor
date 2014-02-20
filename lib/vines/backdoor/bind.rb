@@ -21,7 +21,7 @@ module Vines
         el = node.xpath('ns:bind/ns:resource', 'ns' => NS).first
         resource = el ? el.text.strip : ''
         generate = resource.empty? || !resource_valid?(resource) || resource_used?(resource)
-        generate ? Kit.uuid : resource
+        generate ? Vines::Kit.uuid : resource
       end
 
       def fabricate_request(node)

@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/Strech/vines-backdoor.png?branch=master)](https://travis-ci.org/Strech/vines-backdoor)
+[![Code Climate](https://codeclimate.com/github/Strech/vines-backdoor.png)](https://codeclimate.com/github/Strech/vines-backdoor)
 
 # Vines::Backdoor
 

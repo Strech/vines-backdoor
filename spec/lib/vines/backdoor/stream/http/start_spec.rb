@@ -14,4 +14,17 @@ describe Vines::Stream::Http::Start do
       expect(gap).to receive(:node).with(xml)
     end
   end
+
+  context "when backdoor attribute is missing" do
+    let(:start) { described_class.new(stream) }
+    let(:xml) { node(%q{<body xmlns="http://jabber.org/protocol/httpbind" rid="42" />}) }
+    let(:stream) { double("Stream", backdoor: "12345") }
+
+    after { em { start.node(xml) } }
+
+    it do
+      expect(stream).to receive(:start).with(xml)
+      expect(stream).to receive(:advance)
+    end
+  end
 end
