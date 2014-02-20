@@ -3,7 +3,9 @@
 
 # Vines::Backdoor
 
-TODO: Write a gem description
+Allows you to authenticate and generate bosh session for vines user by sigle request without password.
+
+All that you need – a secret key from backdoor of your vines
 
 ## Installation
 
@@ -21,7 +23,7 @@ Or install it yourself as:
 
 ## :warning: Attention :warning:
 
-Never, never use this for client requests, only internal server use
+Never, ever, ever use this for external client authentication. This extension is only for internal server use :fire:
 
 ## Usage
 
@@ -31,8 +33,6 @@ Modify your vines config file
 # conf/config.rb
 
 require 'vines/backdoor'
-
-# ...
 
 # http bind section
 http '0.0.0.0', 5280 do
@@ -48,8 +48,9 @@ end
 Now http service accept extended requests with some extra data in it.
 All response messages (errors and success responses) are RFC compatible
 
+Send authentication and binding request in a batch
+
 ```html
-<!-- request -->
 <body xmlns="http://jabber.org/protocol/httpbind" xmlns:xmpp="urn:xmpp:xbosh" xmpp:version="1.0"
 	  content="text/xml; charset=utf-8" rid="235205804" to="localhost" secure="true" wait="60" hold="1"
 	  backdoor="my-secret-backdoor-key">
@@ -58,8 +59,11 @@ All response messages (errors and success responses) are RFC compatible
     <resource>pidgin</resource>
   </bind>
 </body>
+```
 
-<!-- response -->
+And get a successful response
+
+```html
 <iq type="result" id="235205804">
   <bind xmlns="urn:ietf:params:xml:ns:xmpp-bind">
     <jid>user@localhost/pidgin</jid>
