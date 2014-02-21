@@ -3,9 +3,11 @@
 
 # Vines::Backdoor
 
-Allows you to authenticate and generate bosh session for vines user by sigle request without password.
+Allows you to authenticate and generate bosh session for Vines user by sigle request without password.
+All that you need – a secret key from backdoor of your Vines
 
-All that you need – a secret key from backdoor of your vines
+Standart http-bind flow requires 4 requests with 4 responses from Vines (last is binding result).
+With vines-backdoor you need just 1 request and 1 response from Vines :triumph:
 
 ## Installation
 
@@ -23,7 +25,7 @@ Or install it yourself as:
 
 ## :warning: Attention :warning:
 
-Never, ever, ever use this for external client authentication. This extension is only for internal server use :fire:
+Never, ever, ever use this for external client authentication. This extension is only for internal server use
 
 ## Usage
 
