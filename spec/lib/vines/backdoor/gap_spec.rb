@@ -32,6 +32,20 @@ describe Vines::Backdoor::Gap do
     it { expect { klass.node(xml) }.to raise_error Vines::StreamErrors::NotAuthorized }
   end
 
+  context "when backdoor attribute is not setup" do
+    let(:xml) do
+      node(%q{<body backdoor="">
+        <auth xmlns="urn:ietf:params:xml:ns:xmpp-sasl" mechanism="INTERNAL">user@localhost</auth>
+        <bind xmlns="urn:ietf:params:xml:ns:xmpp-bind">
+          <resource>pidgin</resource>
+        </bind></body>})
+    end
+
+    before { stream.stub(backdoor: nil) }
+
+    it { expect { klass.node(xml) }.to raise_error Vines::StreamErrors::NotAuthorized }
+  end
+
   context "when user is authenticated and session is binded" do
     let(:user) { double("User", jid: "user@localhost/pidgin") }
     let(:xml) do
