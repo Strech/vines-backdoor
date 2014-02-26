@@ -76,6 +76,7 @@ describe Vines::Backdoor::Gap do
     end
     after { klass.node(xml) }
 
+    it { expect(stream).to receive(:advance).with(kind_of Vines::Stream::Http::Ready) }
     it do
       expect(stream).to receive(:write) do |response|
         expect(response.to_s).to eq expected.to_s

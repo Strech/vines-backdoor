@@ -34,6 +34,7 @@ module Vines
         end
 
         stream.write(result)
+        stream.advance(Vines::Stream::Http::Ready.new stream)
       end
 
       def backdoor?(node)
